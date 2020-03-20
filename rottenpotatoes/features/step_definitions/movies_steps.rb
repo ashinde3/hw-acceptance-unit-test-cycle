@@ -23,3 +23,11 @@ Then /I should see all the movies/ do
     step %{I should see "#{movie.title}"}
   end
 end
+
+#Then /^the director of "([^"]*)" should be "([^"]*)"$/ do |title_director, movie_director|
+ # expect(page.body).to match(/.*details about #{title_director}.*Director: #{movie_director}.*/m)
+#end
+Then /the director of "(.*)" should be "(.*)"/ do |e1, e2|
+  movie = Movie.where("title = ?", e1).first
+  movie.director == e2
+end
